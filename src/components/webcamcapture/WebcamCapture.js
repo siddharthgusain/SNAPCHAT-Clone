@@ -1,5 +1,10 @@
-import { useRef } from 'react';
+import { useRef ,useCallback, useState } from 'react';
 import Webcam from 'react-webcam';
+import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
+import { useDispatch } from 'react-redux';
+import { setCameraImage } from '../../features/cameraSlice';
+import { useHistory } from 'react-router-dom';
+import './webcamCapture.css';
 
 const videoContraints = {
     width : 250,
@@ -10,6 +15,16 @@ const videoContraints = {
 function WebcamCapture() {
 
     const webcamRef = useRef(null);
+    const dispatch = useDispatch();
+    const history = useHistory();
+
+    const capture = useCallback(() =>{
+
+        const imageSrc = webcamRef.current.getScreenshot();
+        dispatch(setCameraImage(imageSrc));
+        history.push("/preview");
+
+    },[webcamRef]);
 
     return (
         <div className="webcamCapture">
@@ -21,6 +36,14 @@ function WebcamCapture() {
                 screenshotFormat = "image/jpeg"
                 videoConstraints = { videoContraints }
             />
+
+            <RadioButtonUncheckedIcon
+                className = "webcamCapture_button"
+                onClick = { capture }
+                fontSize = "large"
+            />
+
+
         </div>
     )
 }
