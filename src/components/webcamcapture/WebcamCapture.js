@@ -29,6 +29,7 @@ function WebcamCapture() {
     return (
         <div className="webcamCapture">
             <Webcam 
+                className="webcamcaptureContainer"
                 audio = { false }
                 height = { videoContraints.height }
                 width = { videoContraints.width }
@@ -38,7 +39,7 @@ function WebcamCapture() {
             />
 
             <RadioButtonUncheckedIcon
-                className = "webcamCapture_button"
+                className = "webcamCapture-button"
                 onClick = { capture }
                 fontSize = "large"
             />
