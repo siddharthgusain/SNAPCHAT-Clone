@@ -42,11 +42,23 @@ function Chats() {
 
     }
 
+    const signOut = () => {
+        
+        auth.signOut().then(() =>{
+
+            history.replace("/");
+            alert("signed out");
+
+        });
+        
+
+    }
+
     return (
         <div className = "chats">
 
             <div className = "chats-header">
-                <Avatar src= { user.profilePicture } onClick = { () => auth.signOut() } className = "chats-avatar" />
+                <Avatar src= { user.profilePicture } onClick = { signOut } className = "chats-avatar" />
                 <div className = "chats-search" >
                     <SearchIcon className="chats-searchIcon" />
                     <input placeholder = "Friends" type = "text" />

@@ -20,8 +20,6 @@ function Login() {
                 id:result.user.uid,
             })
             );
-
-            localStorage.setItem("user",JSON.stringify(result));
         })
         .catch(error => alert(error.message));
 
