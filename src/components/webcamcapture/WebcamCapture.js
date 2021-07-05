@@ -1,4 +1,4 @@
-import { useRef ,useCallback, useState } from 'react';
+import { useRef ,useCallback } from 'react';
 import Webcam from 'react-webcam';
 import RadioButtonUncheckedIcon from '@material-ui/icons/RadioButtonUnchecked';
 import { useDispatch } from 'react-redux';
@@ -24,7 +24,7 @@ function WebcamCapture() {
         dispatch(setCameraImage(imageSrc));
         history.push("/preview");
 
-    },[webcamRef]);
+    },[webcamRef , history , dispatch ]);
 
     return (
         <div className="webcamCapture">

@@ -12,6 +12,10 @@ import AttachFileIcon from '@material-ui/icons/AttachFile';
 import CropIcon from '@material-ui/icons/Crop';
 import TimerIcon from '@material-ui/icons/Timer';
 import SendIcon from '@material-ui/icons/Send';
+import { v4 as uuid } from 'uuid';
+import { db , storage } from '../../firebase';   
+import firebase from 'firebase';
+ 
 
 function Preview() {
     const cameraImage = useSelector(selectcameraImage);
@@ -31,7 +35,39 @@ function Preview() {
 
     };  
 
+    const sendPost = () =>{
+
+        const id = uuid();
+        const uploadTask = storage.ref(`posts/${id}`).putString(cameraImage,"data_url");
+
+        uploadTask.on(
+
+            "state_changed" ,
+             null ,
+            (error) => {
+            console.log(error);
+            },
+
+            () => {
+                storage
+                .ref('posts')
+                .child(id)
+                .getDownloadURL()
+                .then((url) => {
+                    db.collection('posts').add({
+                        imageUrl : url , 
+                        username : "siddharth",
+                        read: false,
+                        timestamp : firebase.firestore.FieldValue.serverTimestamp(),
+                    })
+                });
+                history.replace("/chats");
+            }
+        );
+    };
+
     return (
+        
         <div className = "preview">
             <CloseIcon onClick = { closePreview }  className = "preview-close "/>
             <div className="preview-toolbarRight">
@@ -45,10 +81,14 @@ function Preview() {
             </div>
 
     
-            <img src= { cameraImage } alt="" />
-            <div className="preview-footer">
+            <img src= { cameraImage } alt="" style ={{ borderRadius : "10px"}}/>
+            <div className="preview-footer" onClick = { sendPost } >
                 <h2>Send Now</h2>
-                <SendIcon fontSize="small" className="preview-sendIcon" />
+                <SendIcon 
+                    fontSize="small" 
+                    className="preview-sendIcon" 
+                       
+                />
             </div>
         </div>
     )
