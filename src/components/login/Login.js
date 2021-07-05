@@ -12,6 +12,7 @@ function Login() {
 
         auth.signInWithPopup(provider)
         .then(result =>{
+            
             dispatch(
                 login({
                 username : result.user.displayName,
@@ -19,8 +20,12 @@ function Login() {
                 id:result.user.uid,
             })
             );
+
+            localStorage.setItem("user",JSON.stringify(result));
         })
         .catch(error => alert(error.message));
+
+        
     };
 
     return (
