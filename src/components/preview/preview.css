@@ -44,8 +44,9 @@
 }
 
 .preview-footer > h2{
-    font-size: 8px;
+    font-size: 10px;
     margin-right: 3px;
+    padding: 3px;
 }
 
 .preview-sendIcon{
