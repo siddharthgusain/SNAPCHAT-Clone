@@ -20,7 +20,6 @@ function Chats() {
     const history = useHistory();
 
     useEffect(() =>{
-
         db.collection('posts')
         .orderBy('timestamp','desc')
         .onSnapshot((snapshot) => {
@@ -32,6 +31,7 @@ function Chats() {
             }))
             )
         });
+
     },[]);
 
     const takesnap = () => {
@@ -43,7 +43,7 @@ function Chats() {
     }
 
     const signOut = () => {
-        
+
         auth.signOut().then(() =>{
 
             history.replace("/");
