@@ -46,27 +46,35 @@ function App() {
           { !user
               ? ( <Login /> )
               : (  
-              <div className="app_body">
+                <>
+                  <img 
+                  className="app-logo"
+                  src="https://yt3.ggpht.com/ytc/AKedOLSuVe8rfS92TYU_SonDcNA6Zd1gufGWKHbhVaEtSQ=s900-c-k-c0x00ffffff-no-rj" alt="" />
+                  <div className="app-body">
+                    <div className="app-bodyBackground">
                     <Switch>
 
-                      <Route exact path="/">
-                        <WebcamCapture />
-                      </Route>
+                        <Route exact path="/">
+                          <WebcamCapture />
+                        </Route>
 
-                      <Route path="/preview">
-                        <Preview />
-                      </Route>
+                        <Route path="/preview">
+                          <Preview />
+                        </Route>
 
-                      <Route exact path="/chats">
-                        <Chats />
-                      </Route>
+                        <Route exact path="/chats">
+                          <Chats />
+                        </Route>
 
-                      <Route path="/chats/view">
-                        <ChatView />
-                      </Route>
-                     
-                    </Switch>
-              </div>
+                        <Route path="/chats/view">
+                          <ChatView />
+                        </Route>
+
+                      </Switch>
+                    </div>
+                        
+                  </div>
+                </>
               )
           }
         

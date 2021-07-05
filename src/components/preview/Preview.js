@@ -15,12 +15,14 @@ import SendIcon from '@material-ui/icons/Send';
 import { v4 as uuid } from 'uuid';
 import { db , storage } from '../../firebase';   
 import firebase from 'firebase';
+import { selectUser } from '../../features/appSlice';
  
 
 function Preview() {
     const cameraImage = useSelector(selectcameraImage);
     const history  = useHistory(); 
     const dispatch = useDispatch();
+    const user  = useSelector(selectUser);
 
     useEffect(() => {
         if(!cameraImage ){
@@ -56,8 +58,9 @@ function Preview() {
                 .then((url) => {
                     db.collection('posts').add({
                         imageUrl : url , 
-                        username : "siddharth",
+                        username : user.username ,
                         read: false,
+                        profilePic : user.profilePicture,
                         timestamp : firebase.firestore.FieldValue.serverTimestamp(),
                     })
                 });
